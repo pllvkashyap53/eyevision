@@ -1,4 +1,5 @@
 <?php
+include 'connect.php';
 $result = '';
 $error = '';
 
@@ -9,6 +10,8 @@ if(isset($_POST['submit'])){
         $message = $_POST['message'];  
         
          if ($name != '' || $email != '' || $phone != '' || $message != '') {
+            $query = mysqli_query($dbc, "INSERT INTO contact VALUES (default,'$name','$email','$phone','$message')");
+            if ($query) {
             require 'phpmailer/PHPMailerAutoload.php';
             $mail = new PHPMailer;
             //$mail->isSMTP();
@@ -39,6 +42,7 @@ if(isset($_POST['submit'])){
                $error = "Something went wrong. Please try again later.";
             }
         }
+         }
         else{
             $error = "Unable to send message. Some Fields are blank.";
         }
@@ -295,9 +299,9 @@ if(isset($_POST['submit'])){
                 <!-- // map -->
                 <section id="foot_top" class="show-googlemap plus">
                     <div class="foot_top_txt animatedParent">
-                        <i class="fa flaticon-technology-6 map-marker foot_icon pulse animated"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12160.450392485043!2d-74.67589600039003!3d40.36202761951634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sca!4v1587676436368!5m2!1sen!2sca" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe></i>
-                        View Our Location - Google Map
-                        <i class="fa fa-angle-right foot_icon foot_icon1"></i>
+                        <i class="fa flaticon-technology-6 map-marker foot_icon pulse animated"></i>
+                        <a href="https://goo.gl/maps/U79N5ParjRBJCK1e7">View Our Location - Google Map
+                            <i class="fa fa-angle-right foot_icon foot_icon1"></i>
                     </div>
                 </section>
             </div>
@@ -380,7 +384,5 @@ if(isset($_POST['submit'])){
 ================================= -->
 
 </body>
-
-<!-- Theme Reference by AccuraThemes -->
 
 </html>
